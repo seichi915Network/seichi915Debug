@@ -1,6 +1,10 @@
 # seichi915Debug
 プラグインテスト用のPaperMC + BungeeCord + MySQL環境
 
+# 必要なもの
+* Docker
+* docker-compose
+
 # 使い方
 Windowsをお使いの場合は`.\start.bat`、Linux、macOSをお使いの場合は`./start.sh`を実行することで起動できます。<br>
 Linux、macOSで`./start.sh`が実行できなかった場合は、`chmod +x start.sh`を実行してください。<br>
