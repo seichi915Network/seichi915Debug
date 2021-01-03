@@ -1,0 +1,110 @@
+version: '3.7'
+
+networks:
+  seichi915network:
+    external: false
+
+services:
+  server-1:
+    stdin_open: true
+    build: ./dockerfiles/papermc/
+    networks:
+      - seichi915network
+    ports:
+      - 25501:25565
+    volumes:
+      - server-1:/paper-files/
+      - server-1-plugins:/paper-files/plugins/
+    environment:
+      - XMS=1G
+      - XMX=1G
+      - VERSION=1.14.4
+      - EULA=false
+  server-2:
+    stdin_open: true
+    build: ./dockerfiles/papermc/
+    networks:
+      - seichi915network
+    ports:
+      - 25502:25565
+    volumes:
+      - server-2:/paper-files/
+      - server-2-plugins:/paper-files/plugins/
+    environment:
+      - XMS=1G
+      - XMX=1G
+      - VERSION=1.14.4
+      - EULA=false
+  bungeecord:
+    stdin_open: true
+    build: ./dockerfiles/bungeecord/
+    networks:
+      - seichi915network
+    ports:
+      - 25565:25577
+    volumes:
+      - bungeecord:/work/
+      - bungeecord-plugins:/work/plugins/
+    environment:
+      - XMS=1G
+      - XMX=1G
+  database:
+    image: mysql:5.7.32
+    networks:
+      - seichi915network
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.8.5
+    networks:
+      - seichi915network
+    environment:
+      - TZ=Asia/Tokyo
+      - PMA_ARBITRARY=1
+      - PMA_HOST=database
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    ports:
+      - 80:80
+    depends_on:
+      - database
+
+volumes:
+  server-1:
+    driver_opts:
+      type: none
+      device: $PWD/server-1
+      o: bind
+  server-1-plugins:
+    driver_opts:
+      type: none
+      device: $PWD/server-1-plugins
+      o: bind
+  server-2:
+    driver_opts:
+      type: none
+      device: $PWD/server-2
+      o: bind
+  server-2-plugins:
+    driver_opts:
+      type: none
+      device: $PWD/server-2-plugins
+      o: bind
+  bungeecord:
+    driver_opts:
+      type: none
+      device: $PWD/bungeecord
+      o: bind
+  bungeecord-plugins:
+    driver_opts:
+      type: none
+      device: $PWD/bungeecord-plugins
+      o: bind
+  database:
+    driver_opts:
+      type: none
+      device: $PWD/database
+      o: bind
