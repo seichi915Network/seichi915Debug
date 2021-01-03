@@ -4,7 +4,7 @@ cd /paper-files/
 
 rm -f paperclip.jar
 
-curl -O https://www.seichi915.net/docker/PaperMCDownloader.jar
+curl -O https://docker.seichi915.net/PaperMCDownloader.jar
 
 java -jar PaperMCDownloader.jar -v=$VERSION -d=.
 
