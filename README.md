@@ -4,6 +4,7 @@
 # 必要なもの
 * Docker
 * docker-compose
+* .NET Framework 4.5(Windowsの場合)
 
 # 使い方
 Windowsをお使いの場合は`.\start.bat`、Linux、macOSをお使いの場合は`./start.sh`を実行することで起動できます。<br>
