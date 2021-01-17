@@ -10,8 +10,6 @@ services:
     build: ./dockerfiles/papermc/
     networks:
       - seichi915network
-    ports:
-      - 25501:25565
     volumes:
       - server-1:/paper-files/
       - server-1-plugins:/paper-files/plugins/
@@ -25,8 +23,6 @@ services:
     build: ./dockerfiles/papermc/
     networks:
       - seichi915network
-    ports:
-      - 25502:25565
     volumes:
       - server-2:/paper-files/
       - server-2-plugins:/paper-files/plugins/
